@@ -3,32 +3,43 @@ package DiningPhilosophers;
 import java.util.concurrent.Semaphore;
 
 public class Philosopher extends Thread {
-	private int filosofo;
-	private Dining jantar;
-	private Semaphore garfos[];
+	private int philosopherKey;
+	private Dining dining;
+	private Semaphore forks[];
 
-	public Philosopher(int chave, Dining jantar, Semaphore[] garfos) {
-		this.filosofo = chave;		
-		this.jantar = jantar;
-		this.garfos = garfos;
+	public Philosopher(int key, Dining dining, Semaphore[] forksSemaphores) {
+		this.philosopherKey = key;		
+		this.dining = dining;
+		this.forks = forksSemaphores;
 	}
 
-	public int getChave() { 
-		return filosofo;
+	public int getKey() { 
+		return philosopherKey;
 	}
 
-	public void setStatus(eEstadoDoFilosofo estado) {
-		jantar.SetInfo(filosofo, estado);
+	public void setStatus(PhillosopherState state) {
+		dining.SetVisualState(philosopherKey, state);
+
+		switch (state) {
+			case EATING:
+				eating();
+				break;
+			case THINKING:
+				thinking();
+				break;
+			default:
+				break;
+		}
 	}
 
-	private void pensando() { 
+	private void thinking() { 
 		try {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 		}
 	}
 
-	private void comendo() { 
+	private void eating() { 
 		try {
 			Thread.sleep(2500);
 		} catch (Exception e) {
@@ -37,16 +48,15 @@ public class Philosopher extends Thread {
 	 
 	public void run() {
         while (true) {
-            setStatus(eEstadoDoFilosofo.THINKING);
-            pensando();
-            setStatus(eEstadoDoFilosofo.HUNGRY);
+            setStatus(PhillosopherState.THINKING);
+            setStatus(PhillosopherState.HUNGRY);
             try {
-                garfos[getChave()].acquire();
-                garfos[(getChave() + 1) % 5].acquire();
-                setStatus(eEstadoDoFilosofo.EATING);
-                comendo();
-                garfos[getChave()].release();
-                garfos[(getChave() + 1) % 5].release();
+                forks[getKey()].acquire();
+                forks[(getKey() + 1) % 5].acquire();
+                setStatus(PhillosopherState.EATING);
+                eating();
+                forks[getKey()].release();
+                forks[(getKey() + 1) % 5].release();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

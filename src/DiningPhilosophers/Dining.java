@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
 
 public class Dining extends JFrame {
 	private static final long serialVersionUID = 8531554653309568273L;
-	private Image mesa, filosofo0, filosofo1, filosofo2, filosofo3, filosofo4;
+	private Image table, filosofo0, filosofo1, filosofo2, filosofo3, filosofo4;
 	private Philosopher f0, f1, f2, f3, f4;
 	private JPanel contentPane;
 	
@@ -31,14 +31,14 @@ public class Dining extends JFrame {
 	}
 	
 	public void paint(Graphics g){	
-		Graphics2D graficos = (Graphics2D) g;
+		Graphics2D graphics = (Graphics2D) g;
 		
-		graficos.drawImage(mesa, 0, 0, null);
-		graficos.drawImage(filosofo0, 0, 0, null);
-		graficos.drawImage(filosofo1, 0, 0, null);
-		graficos.drawImage(filosofo2, 0, 0, null);
-		graficos.drawImage(filosofo4, 0, 0, null);
-		graficos.drawImage(filosofo3, 0, 0, null);
+		graphics.drawImage(table, 0, 0, null);
+		graphics.drawImage(filosofo0, 0, 0, null);
+		graphics.drawImage(filosofo1, 0, 0, null);
+		graphics.drawImage(filosofo2, 0, 0, null);
+		graphics.drawImage(filosofo4, 0, 0, null);
+		graphics.drawImage(filosofo3, 0, 0, null);
 	}
 	
 	public void jantar_WindowDestroy(Object target) {
@@ -47,8 +47,8 @@ public class Dining extends JFrame {
 	
 	public Dining() {
 		setTitle("Dining Philosophers");;
-		ImageIcon reference = new ImageIcon("src\\Images\\Mesa.png");
-		mesa = reference.getImage();
+		ImageIcon reference = new ImageIcon("src\\Images\\Table.png");
+		table = reference.getImage();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 1024);
 		contentPane = new JPanel();
@@ -57,7 +57,7 @@ public class Dining extends JFrame {
 		contentPane.setLayout(null);
 		setResizable(false);
 		
-		reference = new ImageIcon("src\\Images\\mesa.png");
+		reference = new ImageIcon("src\\Images\\Table.png");
 		
 
 		Semaphore[] garfosSem = new Semaphore[5];
@@ -78,79 +78,79 @@ public class Dining extends JFrame {
 		f4.start();
 	}
 	
-	public void SetInfo(int chave, eEstadoDoFilosofo estado) {
+	public void SetVisualState(int key, PhillosopherState state) {
 		
-		if (chave == 0) {		
-			if (estado == eEstadoDoFilosofo.THINKING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo0Pensando.png");		
+		if (key == 0) {		
+			if (state == PhillosopherState.THINKING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo0Thinking.png");		
 				filosofo0 = reference.getImage();
 				
-			} else if (estado == eEstadoDoFilosofo.HUNGRY) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo0Faminto.png");		
+			} else if (state == PhillosopherState.HUNGRY) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo0Hungry.png");		
 				filosofo0 = reference.getImage();
 				
-			} else if (estado == eEstadoDoFilosofo.EATING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo0Comendo.png");		
+			} else if (state == PhillosopherState.EATING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo0Eating.png");		
 				filosofo0 = reference.getImage();				
 			}
 		}
-		else if (chave == 1) {
-			if (estado == eEstadoDoFilosofo.THINKING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo1Pensando.png");		
+		else if (key == 1) {
+			if (state == PhillosopherState.THINKING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo1Thinking.png");		
 				filosofo1 = reference.getImage();
 			
-			} else if (estado == eEstadoDoFilosofo.HUNGRY) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo1Faminto.png");		
+			} else if (state == PhillosopherState.HUNGRY) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo1Hungry.png");		
 				filosofo1 = reference.getImage();
 			
 
-			} else if (estado == eEstadoDoFilosofo.EATING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo1Comendo.png");		
+			} else if (state == PhillosopherState.EATING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo1Eating.png");		
 				filosofo1 = reference.getImage();
 			}
 		}
-		else if (chave == 2) {
-			if (estado == eEstadoDoFilosofo.THINKING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo2Pensando.png");		
+		else if (key == 2) {
+			if (state == PhillosopherState.THINKING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo2Thinking.png");		
 				filosofo2 = reference.getImage();
 			
-			} else if (estado == eEstadoDoFilosofo.HUNGRY) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo2Faminto.png");		
+			} else if (state == PhillosopherState.HUNGRY) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo2Hungry.png");		
 				filosofo2 = reference.getImage();
 			
 
-			} else if (estado == eEstadoDoFilosofo.EATING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo2Comendo.png");		
+			} else if (state == PhillosopherState.EATING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo2Eating.png");		
 				filosofo2 = reference.getImage();
 			}
 		}
-		else if (chave == 3) {
-			if (estado == eEstadoDoFilosofo.THINKING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo3Pensando.png");		
+		else if (key == 3) {
+			if (state == PhillosopherState.THINKING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo3Thinking.png");		
 				filosofo3 = reference.getImage();
 			
-			} else if (estado == eEstadoDoFilosofo.HUNGRY) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo3Faminto.png");		
+			} else if (state == PhillosopherState.HUNGRY) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo3Hungry.png");		
 				filosofo3 = reference.getImage();
 			
 
-			} else if (estado == eEstadoDoFilosofo.EATING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo3Comendo.png");		
+			} else if (state == PhillosopherState.EATING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo3Eating.png");		
 				filosofo3 = reference.getImage();
 			}
 		}
-		else if (chave == 4) {
-			if (estado == eEstadoDoFilosofo.THINKING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo4Pensando.png");		
+		else if (key == 4) {
+			if (state == PhillosopherState.THINKING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo4Thinking.png");		
 				filosofo4 = reference.getImage();
 			
-			} else if (estado == eEstadoDoFilosofo.HUNGRY) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo4Faminto.png");		
+			} else if (state == PhillosopherState.HUNGRY) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo4Hungry.png");		
 				filosofo4 = reference.getImage();
 			
 
-			} else if (estado == eEstadoDoFilosofo.EATING) {
-				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo4Comendo.png");		
+			} else if (state == PhillosopherState.EATING) {
+				ImageIcon reference = new ImageIcon("src\\Images\\imgFilosofo4Eating.png");		
 				filosofo4 = reference.getImage();
 			}
 		}

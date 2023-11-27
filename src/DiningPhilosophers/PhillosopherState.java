@@ -1,6 +1,6 @@
 package DiningPhilosophers;
 
-public enum eEstadoDoFilosofo {
+public enum PhillosopherState {
 	THINKING,
 	HUNGRY,
     EATING
